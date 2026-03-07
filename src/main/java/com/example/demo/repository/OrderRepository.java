@@ -8,3 +8,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByPhone(String phone);
    // List<Order> findByStatus(String status);
 }
+// http://localhost:8080/api/orders/track-order?phone=9360667080
