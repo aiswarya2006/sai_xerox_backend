@@ -222,6 +222,12 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
+    
+    
+    
+    public List<Order> trackOrder(String phone) {
+        return orderRepository.findByPhone(phone);
+    }
 
     public Order createOrder(
             String phone,

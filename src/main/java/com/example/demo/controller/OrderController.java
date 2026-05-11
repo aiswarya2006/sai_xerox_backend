@@ -32,6 +32,19 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+    
+    
+    @GetMapping("/track-order")
+    public ResponseEntity<?> trackOrder(@RequestParam String phone) {
+
+        List<Order> orders = orderService.trackOrder(phone);
+
+        if (orders.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(orders);
+    }
 
     /**
      * CREATE ORDER
