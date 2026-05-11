@@ -35,4 +35,14 @@ public class JwtUtil {
             return false;
         }
     }
+    public static String extractToken(String bearerToken) {
+
+        if (bearerToken != null &&
+            bearerToken.startsWith("Bearer ")) {
+
+            return bearerToken.substring(7);
+        }
+
+        return null;
+    }
 }

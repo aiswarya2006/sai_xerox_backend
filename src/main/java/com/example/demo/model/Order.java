@@ -19,7 +19,8 @@ public class Order {
     private String binding;       // none | spiral | calico | hole
     private String description;
     private int totalPrice;
-
+    private String trackId;
+   // private LocalDateTime createdAt;
     @Column(length = 2000)
     private String fileNames;     // comma-separated saved file names
 
@@ -68,4 +69,15 @@ public class Order {
     public void setStatus(String status) { this.status = status; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    public String getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
+    }
 }

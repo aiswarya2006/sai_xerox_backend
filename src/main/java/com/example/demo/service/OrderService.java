@@ -203,6 +203,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -354,6 +355,11 @@ public class OrderService {
 
         // ✅ Save Order
         Order order = new Order();
+        String trackId =
+        	    "SX" + ((int)(Math.random() * 90000) + 10000);
+
+        	order.setTrackId(trackId);
+        //order.setCreatedAt(LocalDateTime.now());
         order.setPhone(phone);
         order.setContentType("pdf");
         order.setPrintType(printType);

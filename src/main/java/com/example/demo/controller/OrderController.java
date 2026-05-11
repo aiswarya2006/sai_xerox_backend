@@ -63,6 +63,7 @@ public class OrderController {
 
             return ResponseEntity.ok(Map.of(
                     "orderId", order.getId(),
+                    "trackId", order.getTrackId(),
                     "totalPrice", order.getTotalPrice(),
                     "status", order.getStatus(),
                     "message", "Order placed successfully"
@@ -92,10 +93,17 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<?> getAllOrders(@RequestHeader(value = "Authorization", required = false) String token) {
 
-        if (token == null || !JwtUtil.validateToken(token)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Invalid or missing token");
-        }
+//        if (token == null || !JwtUtil.validateToken(token)) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body("Invalid or missing token");
+//        }
+    	String jwt = JwtUtil.extractToken(token);
+
+    	if (jwt == null || !JwtUtil.validateToken(jwt)) {
+
+    	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    	            .body("Invalid or missing token");
+    	}
 
         return ResponseEntity.ok(orderService.getAllOrders());
     }
@@ -152,11 +160,19 @@ public class OrderController {
             @RequestHeader(value = "Authorization", required = false) String token) throws Exception {
 
         // 🔒 Check JWT token
-        if (token == null || !JwtUtil.validateToken(token)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Invalid or missing token");
-        }
+//        if (token == null || !JwtUtil.validateToken(token)) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body("Invalid or missing token");
+//        }
 
+    	String jwt = JwtUtil.extractToken(token);
+
+    	if (jwt == null || !JwtUtil.validateToken(jwt)) {
+
+    	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    	            .body("Invalid or missing token");
+    	}
+    	
         Path path = Paths.get("uploads").resolve(filename);
         Resource resource = new UrlResource(path.toUri());
 
@@ -197,9 +213,17 @@ public class OrderController {
     @GetMapping("/api/orders")
     public ResponseEntity<?> getOrders(@RequestHeader(value = "Authorization", required = false) String token) {
 
-        if (token == null || !JwtUtil.validateToken(token)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
-        }
+//        if (token == null || !JwtUtil.validateToken(token)) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
+//        }
+    	
+    	String jwt = JwtUtil.extractToken(token);
+
+    	if (jwt == null || !JwtUtil.validateToken(jwt)) {
+
+    	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    	            .body("Invalid or missing token");
+    	}
 
         return ResponseEntity.ok(orderService.getAllOrders());
     }
@@ -218,7 +242,7 @@ public class OrderController {
 //            return ResponseEntity.ok(updated);
 //
 //        } catch (Exception e) {
-//
+//sdhdsjcsjxjx
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
@@ -228,10 +252,17 @@ public class OrderController {
             @RequestBody Map<String, String> body,
             @RequestHeader(value = "Authorization", required = false) String token) {
 
-        if (token == null || !JwtUtil.validateToken(token)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Invalid or missing token");
-        }
+//        if (token == null || !JwtUtil.validateToken(token)) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body("Invalid or missing token");
+//        }
+    	String jwt = JwtUtil.extractToken(token);
+
+    	if (jwt == null || !JwtUtil.validateToken(jwt)) {
+
+    	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    	            .body("Invalid or missing token");
+    	}
 
         try {
 
