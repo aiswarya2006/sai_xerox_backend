@@ -214,9 +214,8 @@ public class OrderService {
     @Value("${file.upload-dir:uploads}")
     private String uploadDir;
 
-    @Value("${libreoffice.path}")
+    @Value("${libreoffice.path:}")
     private String libreOfficePath;
-
     private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
     public OrderService(OrderRepository orderRepository) {
@@ -277,28 +276,31 @@ public class OrderService {
             }
 
             // ✅ DOCX → PDF using LibreOffice
+//            else if (originalName.endsWith(".docx")) {
+//
+//                String pdfFileName = uniqueName.replace(".docx", ".pdf");
+//                finalPdfPath = uploadPath.resolve(pdfFileName);
+//
+//                ProcessBuilder processBuilder = new ProcessBuilder(
+//                        libreOfficePath,
+//                        "--headless",
+//                        "--convert-to", "pdf",
+//                        filePath.toAbsolutePath().toString(),
+//                        "--outdir", uploadPath.toAbsolutePath().toString()
+//                );
+//
+//                processBuilder.redirectErrorStream(true);
+//                Process process = processBuilder.start();
+//
+//                int exitCode = process.waitFor();
+//                if (exitCode != 0) {
+//                    throw new RuntimeException("LibreOffice conversion failed");
+//                }
+//
+//                Files.delete(filePath);
+//            }
             else if (originalName.endsWith(".docx")) {
-
-                String pdfFileName = uniqueName.replace(".docx", ".pdf");
-                finalPdfPath = uploadPath.resolve(pdfFileName);
-
-                ProcessBuilder processBuilder = new ProcessBuilder(
-                        libreOfficePath,
-                        "--headless",
-                        "--convert-to", "pdf",
-                        filePath.toAbsolutePath().toString(),
-                        "--outdir", uploadPath.toAbsolutePath().toString()
-                );
-
-                processBuilder.redirectErrorStream(true);
-                Process process = processBuilder.start();
-
-                int exitCode = process.waitFor();
-                if (exitCode != 0) {
-                    throw new RuntimeException("LibreOffice conversion failed");
-                }
-
-                Files.delete(filePath);
+                throw new RuntimeException("DOCX conversion temporarily disabled");
             }
 
             // ✅ Image → PDF
